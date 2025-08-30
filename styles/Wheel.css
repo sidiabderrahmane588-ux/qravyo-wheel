@@ -1,0 +1,17 @@
+.pointer {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 22px solid #22c55e; /* pointe vers la roue */
+  z-index: 10;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.25));
+}
+
+.wheel {
+  transition: transform 3s cubic-bezier(.17,.67,.32,1.34);
+} 

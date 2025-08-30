@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Avis Client</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'SF Pro Display', Arial, sans-serif;
+      background: linear-gradient(135deg, #e0eafc 0%, #007aff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: rgba(255,255,255,0.85);
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(60,60,60,0.08), 0 1.5px 6px rgba(0,0,0,0.04);
+      padding: 38px 32px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 320px;
+      max-width: 90vw;
+    }
+    h1 {
+      font-weight: 700;
+      color: #007aff;
+      margin-bottom: 18px;
+      letter-spacing: 0.01em;
+      font-size: 2em;
+      text-align: center;
+    }
+    p {
+      color: #222;
+      font-size: 1.1em;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .step {
+      display: none;
+    }
+    .step.active {
+      display: block;
+    }
+    .btn {
+      padding: 14px 38px;
+      font-size: 1.15em;
+      background: linear-gradient(90deg, #007aff 0%, #5ac8fa 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,122,255,0.08);
+      transition: background 0.2s;
+      margin: 10px;
+      width: 100%;
+      max-width: 280px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #005ecb 0%, #3bb3e0 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,122,255,0.15);
+    }
+    .btn-success {
+      background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+    }
+    .btn-success:hover {
+      background: linear-gradient(90deg, #059669 0%, #059669 100%);
+    }
+    #info {
+      margin-top: 18px;
+      color: #007aff;
+      font-size: 1.1em;
+      min-height: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Étape 1: Laisser un avis -->
+    <div id="step1" class="step active">
+      <h1>📝 Laissez un avis Google</h1>
+      <p>Cliquez sur le bouton ci-dessous pour nous laisser un avis.</p>
+      <button onclick="laisserAvis()" class="btn">Laisser un avis</button>
+      <p id="info"></p>
+    </div>
+
+    <!-- Étape 2: Tourner la roue -->
+    <div id="step2" class="step">
+      <h1>🎰 Roue de la Fortune</h1>
+      <p>Merci pour votre avis ! Maintenant tentez votre chance de gagner !</p>
+      <button onclick="tournerRoue()" class="btn btn-success">🎯 Tourner la roue</button>
+      <p id="info2"></p>
+    </div>
+  </div>
+
+  <script>
+    function laisserAvis() {
+      console.log("Bouton avis cliqué");
+      
+      // Protection anti-triche : flag sessionStorage
+      sessionStorage.setItem('avisClique', '1');
+      
+      // Ouvre la page Google dans un nouvel onglet
+      window.open("https://www.google.com/search?q=Best%20Bread%20Avis&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNDU1NTY1MzA2sDQ3Mjc1MTc3NN3AyPiKkd8ptbhEwakoNTFFwbEss3gRK7oIAK-7rjc_AAAA&rldimm=15553560309727547715&tbm=lcl&cs=1&hl=fr&sa=X&ved=0CCMQ9fQKKABqFwoTCPiZzOKozI4DFQAAAAAdAAAAABAS&biw=1440&bih=812&dpr=2#lkt=LocalPoiReviews&lrd=0x47e677007a2a7877:0xd7d958b205ecd143,3,,,,", "_blank");
+      
+      // Affiche l'étape 2
+      document.getElementById('step1').classList.remove('active');
+      document.getElementById('step2').classList.add('active');
+      
+      document.getElementById('info').textContent = "Après avoir laissé votre avis, cliquez sur 'Tourner la roue' !";
+    }
+
+    function tournerRoue() {
+      console.log("Bouton roue cliqué");
+      
+      // Vérifier que l'utilisateur a cliqué sur l'avis
+      if (sessionStorage.getItem('avisClique') === '1') {
+        // Rediriger vers la roue
+        window.location.href = "wheel.html";
+      } else {
+        alert("Veuillez d'abord laisser un avis !");
+      }
+    }
+  </script>
+</body>
+</html>
